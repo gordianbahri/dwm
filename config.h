@@ -11,8 +11,8 @@ static const unsigned int gappov    = 0;        // vert outer gap between window
 static       int smartgaps          = 0;        // 1 means no outer gap when there is only one window
 static const int showbar            = 1;        // 0 means no bar
 static const int topbar             = 1;        // 0 means bottom bar
-static const char *fonts[]          = { "MesloLGS NF:size=12:style=Bold", "monospace:size=12" };
-static const char dmenufont[]       = "MesloLGS NF:size=12:style=Bold";
+static const char *fonts[]          = { "MesloLGS Nerd Font:size=12:style=Bold", "monospace:size=12" };
+static const char dmenufont[]       = "MesloLGS Nerd Font:size=12:style=Bold";
 #include "themes/ayudark.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -100,9 +100,12 @@ static const Key keys[] = {
 	{ MODKEY, 			XK_F2, 		       spawn, 	       {.v = voldowncmd } },				  // voldown
 	{ MODKEY, 			XK_F3,		       spawn, 	       {.v = volupcmd } },				  // volup
 	{ MODKEY, 			XK_F6,		       spawn, 	       {.v = brightdown } }, 				  // brightness down
-	{ MODKEY,			XK_F7, 		       spawn, 	       {.v = brightup } }, 				  // brightness up
+	{ MODKEY,			XK_F7, 		       spawn, 	       {.v = brightup } },
+	{ MODKEY,                       XK_F9,                 spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, 				  // screenshot to clip
 	{ MODKEY,                       XK_s,                  spawn,          SHCMD("exec ~/.hidden/scripts/screenshot_multimon.sh") },       // screenshot MOD+s (requires script in ~/Dev/scripts/screenshot.sh)
 	{ MODKEY|ShiftMask,             XK_s,                  spawn,          SHCMD("exec ~/.hidden/scripts/screenshot_crop.sh") },           // screenshot MOD+S (requires script in ~/Dev/scripts/screenshot_crop.sh)
+  { MODKEY,                       XK_Insert,             spawn,          {.v = (const char*[]){ "bookmarkload", NULL }} },           // Bookmarking
+  { MODKEY|ShiftMask,             XK_Insert,             spawn,          {.v = (const char*[]){ "bookmarkthis", NULL }} },           // Bookmarking //
 	{ MODKEY,                       XK_e,                  spawn,          SHCMD("exec nemo") },                              // open file manager (nemo) MOD+e
 	{ MODKEY,                       XK_b,                  togglebar,      {0} },                                             // show hide bar MOD+b
 	{ MODKEY|ALTKEY|ShiftMask,      XK_l,                  spawn,          SHCMD("exec slock") },                             // lockscreen MOD+ALT+L
