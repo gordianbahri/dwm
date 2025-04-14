@@ -11,8 +11,8 @@ static const unsigned int gappov    = 0;        // vert outer gap between window
 static       int smartgaps          = 0;        // 1 means no outer gap when there is only one window
 static const int showbar            = 1;        // 0 means no bar
 static const int topbar             = 1;        // 0 means bottom bar
-static const char *fonts[]          = { "MesloLGS Nerd Font:size=12:style=Bold", "monospace:size=12" };
-static const char dmenufont[]       = "MesloLGS Nerd Font:size=12:style=Bold";
+static const char *fonts[]          = { "MesloLGS NF:size=12:style=Bold", "monospace:size=12" };
+static const char dmenufont[]       = "MesloLGS NF:size=12:style=Bold";
 #include "themes/ayudark.h"
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -88,19 +88,18 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *mutecmd[] = { "/bin/sh", "-c", "/usr/bin/pulsemixer --toggle-mute", NULL };
 static const char *volupcmd[] = {"/bin/sh", "-c", "/usr/bin/pulsemixer --change-volume +5", NULL };
 static const char *voldowncmd[] = { "/bin/sh", "-c", "/usr/bin/pulsemixer --change-volume -5", NULL };
-static const char *brightup[] = { "/bin/sh", "-c", "~/bin/brightness_control.sh + eDP-1 0.2", NULL };
-static const char *brightdown[] = { "/bin/sh", "-c", "~/bin/brightness_control.sh - eDP-1 0.2", NULL };
+
 
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key                    function        argument */
 	{ MODKEY,                       XK_r,                  spawn,          {.v = dmenucmd } },                                // open app launcher MOD+r
 	{ MODKEY,                       XK_Return,             spawn,          {.v = termcmd } },                                 // spawn terminal MOD+return
-	{ MODKEY,			XK_F1,		       spawn,	       {.v = mutecmd } }, 				  // mutevol
-	{ MODKEY, 			XK_F2, 		       spawn, 	       {.v = voldowncmd } },				  // voldown
-	{ MODKEY, 			XK_F3,		       spawn, 	       {.v = volupcmd } },				  // volup
-	{ MODKEY, 			XK_F6,		       spawn, 	       {.v = brightdown } }, 				  // brightness down
-	{ MODKEY,			XK_F7, 		       spawn, 	       {.v = brightup } },
+	{ MODKEY,	                  		XK_F1,		             spawn,	       {.v = mutecmd } }, 				  // mutevol
+	{ MODKEY,                 			XK_F2, 		             spawn, 	       {.v = voldowncmd } },				  // voldown
+	{ MODKEY, 		                	XK_F3,		               spawn, 	       {.v = volupcmd } },				  // volup
+	{ MODKEY, 		                	XK_F6,		              spawn, 	       {.v = (const char*[]){ "xbacklight", "-dec", "5", NULL }} },
+	{ MODKEY,                       XK_F7,                  spawn, 	       {.v = (const char*[]){ "xbacklight", "-inc", "5", NULL }} },
 	{ MODKEY,                       XK_F9,                 spawn,          SHCMD("maim -s | xclip -selection clipboard -t image/png") }, 				  // screenshot to clip
 	{ MODKEY,                       XK_s,                  spawn,          SHCMD("exec ~/.hidden/scripts/screenshot_multimon.sh") },       // screenshot MOD+s (requires script in ~/Dev/scripts/screenshot.sh)
 	{ MODKEY|ShiftMask,             XK_s,                  spawn,          SHCMD("exec ~/.hidden/scripts/screenshot_crop.sh") },           // screenshot MOD+S (requires script in ~/Dev/scripts/screenshot_crop.sh)
